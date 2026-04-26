@@ -452,14 +452,39 @@ function confirmarAgendamento(){
   const nome=document.getElementById('ag-nome').value.trim();
   const tel=document.getElementById('ag-tel').value.trim();
   const srv=document.getElementById('ag-servico').value;
+  const end=document.getElementById('ag-end').value.trim();
+  const data=document.getElementById('ag-data').value;
+  const periodo=document.getElementById('ag-periodo').value;
+  const obs=document.getElementById('ag-obs').value.trim();
+  const horario=document.querySelector('.time-chip.selected')?.textContent||'Não informado';
   if(!nome||!tel||!srv){showToast('⚠️ Preencha nome, telefone e serviço');return;}
+  const msg=
+    `🌿 *NOVO AGENDAMENTO - RL Jardim & Piscina*\n\n`+
+    `👤 *Cliente:* ${nome}\n`+
+    `📞 *Telefone:* ${tel}\n`+
+    `🔧 *Serviço:* ${srv}\n`+
+    `📍 *Endereço:* ${end||'Não informado'}\n`+
+    `📅 *Data:* ${data?data.split('-').reverse().join('/'):'Não informada'}\n`+
+    `🕐 *Horário:* ${horario} (${periodo})\n`+
+    `📝 *Observações:* ${obs||'Nenhuma'}\n\n`+
+    `_Pedido enviado pelo app RL Jardim_`;
+  window.open('https://wa.me/5514998838890?text='+encodeURIComponent(msg),'_blank');
   openModal('modal-success');
 }
 function enviarOrcamento(){
   const nome=document.getElementById('orc-nome').value.trim();
   const tel=document.getElementById('orc-tel').value.trim();
   const srv=document.getElementById('orc-servico').value;
+  const desc=document.getElementById('orc-desc').value.trim();
   if(!nome||!tel||!srv){showToast('⚠️ Preencha todos os campos');return;}
+  const msg=
+    `💰 *SOLICITAÇÃO DE ORÇAMENTO - RL Jardim & Piscina*\n\n`+
+    `👤 *Cliente:* ${nome}\n`+
+    `📞 *WhatsApp:* ${tel}\n`+
+    `🔧 *Serviço:* ${srv}\n`+
+    `📝 *Descrição:* ${desc||'Não informada'}\n\n`+
+    `_Orçamento solicitado pelo app RL Jardim_`;
+  window.open('https://wa.me/5514998838890?text='+encodeURIComponent(msg),'_blank');
   openModal('modal-orc-ok');
 }
 function selPay(el){document.querySelectorAll('.pay-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');}
